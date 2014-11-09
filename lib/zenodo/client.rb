@@ -18,7 +18,7 @@ module Zenodo
     def initialize(api_key = Zenodo.api_key)
       @api_key = api_key
 
-      # Setup HTTP request connection to insightly.
+      # Setup HTTP request connection to Zenodo.
       @connection ||= Faraday.new do |builder|
         builder.basic_auth @api_key, ''
         builder.request :url_encoded

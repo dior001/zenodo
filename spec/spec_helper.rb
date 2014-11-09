@@ -15,6 +15,6 @@ end
 
 RSpec.configure do |config|
   config.before do
-    Insightly.api_key = insightly_api_key
+    Zenodo.api_key = zenodo_api_key
   end
 end

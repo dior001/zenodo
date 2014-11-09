@@ -3,6 +3,7 @@ require 'zenodo/version'
 module Zenodo
   autoload :Client, 'zenodo/client'
   autoload :DSL, 'zenodo/dsl'
+  autoload :Resources, 'zenodo/resources'
   autoload :Errors, 'zenodo/errors'
 
   class << self

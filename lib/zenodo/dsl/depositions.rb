@@ -4,7 +4,7 @@ module Zenodo
   module DSL::Depositions
     # GET /Deposit/Depositions
     # Get depositions.
-    # @return [Zenodo::Resources::deposition, nil].
+    # @return [Array, nil].
     def get_depositions
       Resources::Deposition.parse(request(:get, "Deposit/Depositions"))
     end
