@@ -8,8 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Zenodo::VERSION
   spec.authors       = ["David Iorns"]
   spec.email         = ["david.iorns@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = 'A Ruby wrapper for the Zenodo API.'
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -18,6 +17,12 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.7"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_dependency 'faraday'
+  spec.add_dependency 'activesupport'
+
+  spec.add_development_dependency 'bundler', '~> 1.7'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rspec', '~> 3.0.0'
+  spec.add_development_dependency 'webmock', '~> 1.18.0'
+  spec.add_development_dependency 'vcr'
 end

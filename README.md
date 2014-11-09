@@ -1,6 +1,6 @@
 # Zenodo
 
-TODO: Write a gem description
+A Ruby wrapper for the Zenodo API.
 
 ## Installation
 
@@ -20,7 +20,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Set the client API key.
+```
+Zenodo.api_key = <your API key>
+```
+
+Get depositions.
+```
+depositions = Zenodo.client.get_depositions
+```
 
 ## Contributing
 

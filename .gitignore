@@ -7,8 +7,10 @@
 /pkg/
 /spec/reports/
 /tmp/
+.idea/
 *.bundle
 *.so
 *.o
 *.a
 mkmf.log
+/config/gem_secret.yml
