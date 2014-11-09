@@ -14,13 +14,13 @@ describe Zenodo::DSL::Depositions do
   let!(:deposition_id) do
     VCR.use_cassette('create_deposition') do
       deposition = Zenodo.client.create_deposition(deposition: deposition_attributes)
-      deposition.id
+      deposition['id']
     end
   end
   let!(:deleted_deposition_id) do
     VCR.use_cassette('create_deposition_for_deletion') do
       deposition = Zenodo.client.create_deposition(deposition: deposition_attributes)
-      deposition.id
+      deposition['id']
     end
   end
 
@@ -48,7 +48,7 @@ describe Zenodo::DSL::Depositions do
   describe '#create_deposition' do
     it 'creates a deposition' do
       VCR.use_cassette('create_deposition') do
-        response = Zenodo.client.create_deposition(deposition: {})
+        response = Zenodo.client.create_deposition(deposition: deposition_attributes)
         expect(response).to be_a(Deposition)
       end
     end
@@ -59,7 +59,7 @@ describe Zenodo::DSL::Depositions do
     it 'updates a deposition' do
       VCR.use_cassette('update_deposition') do
         deposition = Zenodo.client.get_deposition(id: deposition_id)
-        response = Zenodo.client.update_deposition(deposition: deposition)
+        response = Zenodo.client.update_deposition(id: deposition_id, deposition: deposition)
         expect(response).to be_a(Deposition)
       end
     end

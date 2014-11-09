@@ -31,12 +31,14 @@ module Zenodo
 
     # PUT /Deposit/Depositions
     # Updates a deposition.
+    # @param [String, Fixnum] id A deposition's ID.
     # @param [Hash] deposition The deposition to update.
     # @raise [ArgumentError] If the method arguments are blank.
     # @return [Zenodo::Resources::deposition, nil].
-    def update_deposition(deposition:)
+    def update_deposition(id:, deposition:)
+      raise ArgumentError, "ID cannot be blank" if id.blank?
       raise ArgumentError, "Deposition cannot be blank" if deposition.blank?
-      Resources::Deposition.parse(request(:put, "deposit/depositions/", deposition))
+      Resources::Deposition.parse(request(:put, "deposit/depositions/#{id}", deposition))
     end
 
     # DELETE /Deposit/Depositions/{id}
