@@ -4,11 +4,13 @@ require 'openssl'
 require 'active_support/all'
 require 'zenodo/dsl'
 require 'zenodo/errors'
+require 'zenodo/utils'
 
 module Zenodo
   class Client
     include DSL
     include Errors
+    include Utils
 
     URL = 'https://zenodo.org/api/'
     REQUESTS = [:get, :post, :put, :delete]
@@ -20,7 +22,6 @@ module Zenodo
 
       # Setup HTTP request connection to Zenodo.
       @connection ||= Faraday.new do |builder|
-        builder.basic_auth @api_key, ''
         builder.request :url_encoded
         builder.response :logger if Zenodo.logger
         builder.adapter Faraday.default_adapter
@@ -38,8 +39,9 @@ module Zenodo
     def request(method, path, query = {}, headers = HEADERS)
       raise ArgumentError, "Unsupported method #{method.inspect}. Only :get, :post, :put, :delete are allowed" unless REQUESTS.include?(method)
 
+      token_url = UrlHelper.build_url(path: "#{URL}#{path}", params: {access_token: @api_key})
       payload = !query.empty? ? JSON.generate(query) : ''
-      response = @connection.run_request(method, "#{URL}#{path}", payload, headers)
+      response = @connection.run_request(method, token_url, payload, headers)
 
       case response.status.to_i
         when 200..299

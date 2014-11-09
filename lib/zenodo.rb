@@ -5,6 +5,7 @@ module Zenodo
   autoload :DSL, 'zenodo/dsl'
   autoload :Resources, 'zenodo/resources'
   autoload :Errors, 'zenodo/errors'
+  autoload :Utils, 'zenodo/utils'
 
   class << self
     # @return [String]

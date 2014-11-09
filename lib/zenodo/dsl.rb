@@ -6,10 +6,12 @@ module Zenodo
 end
 
 require 'zenodo/dsl/depositions'
+require 'zenodo/utils'
 
 module Zenodo
   module DSL
     include Depositions
+    include Utils
   end
 end
 

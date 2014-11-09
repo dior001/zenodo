@@ -6,7 +6,7 @@ module Zenodo
     # Get depositions.
     # @return [Array, nil].
     def get_depositions
-      Resources::Deposition.parse(request(:get, "Deposit/Depositions"))
+      Resources::Deposition.parse(request(:get, "deposit/depositions/"))
     end
 
     # GET /Deposit/Deposition/{id}
@@ -16,7 +16,7 @@ module Zenodo
     # @return [Zenodo::Resources::deposition, nil].
     def get_deposition(id:)
       raise ArgumentError, "ID cannot be blank" if id.blank?
-      Resources::Deposition.parse(request(:get, "Deposit/Depositions/#{id}"))
+      Resources::Deposition.parse(request(:get, "deposit/depositions/#{id}"))
     end
 
     # POST /Deposit/Depositions
@@ -26,7 +26,7 @@ module Zenodo
     # @return [Zenodo::Resources::deposition, nil].
     def create_deposition(deposition:)
       raise ArgumentError, "Deposition cannot be blank" if deposition.blank?
-      Resources::Deposition.parse(request(:post, "Deposit/Depositions", deposition))
+      Resources::Deposition.parse(request(:post, "deposit/depositions/", deposition))
     end
 
     # PUT /Deposit/Depositions
@@ -36,7 +36,7 @@ module Zenodo
     # @return [Zenodo::Resources::deposition, nil].
     def update_deposition(deposition:)
       raise ArgumentError, "Deposition cannot be blank" if deposition.blank?
-      Resources::Deposition.parse(request(:put, "Deposit/Depositions", deposition))
+      Resources::Deposition.parse(request(:put, "deposit/depositions/", deposition))
     end
 
     # DELETE /Deposit/Depositions/{id}
@@ -46,7 +46,7 @@ module Zenodo
     # @return [Faraday::Response].
     def delete_deposition(id:)
       raise ArgumentError, "ID cannot be blank" if id.blank?
-      request(:delete, "Deposit/Depositions/#{id}")
+      request(:delete, "deposit/depositions/#{id}")
     end
   end
 end
