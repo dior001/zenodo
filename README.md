@@ -30,6 +30,43 @@ Get depositions.
 depositions = Zenodo.client.get_depositions
 ```
 
+Get a deposition.
+```
+deposition = Insightly.client.get_deposition(id: 1)
+```
+
+Create a deposition.
+```
+# Build JSON serialized attributes.
+# The gem won't do this for you. You need to build a serializer that meets your needs."
+deposition_attributes = {
+  'metadata' => {
+    'title' => 'My first upload',
+    'upload_type' => 'poster',
+    'description' => 'This is my first upload',
+    'creators' =>[{'name' => 'Doe, John','affiliation' => 'ZENODO'}]
+  }
+}
+
+# Create the deposition.
+deposition = Insightly.client.create_deposition(deposition: deposition_attributes)
+```
+
+Update a deposition.
+```
+# Build JSON serialized attributes.
+# The gem won't do this for you. You need to build a serializer that meets your needs."
+# deposition_attributes = <same as create>
+
+# Update the deposition.
+deposition = Insightly.client.update_deposition(id: 1, deposition: deposition_attributes)
+```
+
+Delete a deposition.
+```
+Insightly.client.delete_deposition(id: 1)
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/zenodo/fork )
