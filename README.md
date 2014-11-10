@@ -32,7 +32,7 @@ depositions = Zenodo.client.get_depositions
 
 Get a deposition.
 ```
-deposition = Insightly.client.get_deposition(id: 1)
+deposition = Zenodo.client.get_deposition(id: 1)
 ```
 
 Create a deposition.
@@ -49,7 +49,7 @@ deposition_attributes = {
 }
 
 # Create the deposition.
-deposition = Insightly.client.create_deposition(deposition: deposition_attributes)
+deposition = Zenodo.client.create_deposition(deposition: deposition_attributes)
 ```
 
 Update a deposition.
@@ -59,12 +59,12 @@ Update a deposition.
 # deposition_attributes = <same as create>
 
 # Update the deposition.
-deposition = Insightly.client.update_deposition(id: 1, deposition: deposition_attributes)
+deposition = Zenodo.client.update_deposition(id: 1, deposition: deposition_attributes)
 ```
 
 Delete a deposition.
 ```
-Insightly.client.delete_deposition(id: 1)
+Zenodo.client.delete_deposition(id: 1)
 ```
 
 ## Contributing
