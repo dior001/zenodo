@@ -58,8 +58,7 @@ describe Zenodo::DSL::Depositions do
   describe '#update_deposition' do
     it 'updates a deposition' do
       VCR.use_cassette('update_deposition') do
-        deposition = Zenodo.client.get_deposition(id: deposition_id)
-        response = Zenodo.client.update_deposition(id: deposition_id, deposition: deposition)
+        response = Zenodo.client.update_deposition(id: deposition_id, deposition: deposition_attributes)
         expect(response).to be_a(Deposition)
       end
     end
