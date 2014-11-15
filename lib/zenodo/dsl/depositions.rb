@@ -6,7 +6,7 @@ module Zenodo
     # Get depositions.
     # @return [Array, nil].
     def get_depositions
-      Resources::Deposition.parse(request(:get, "deposit/depositions/"))
+      Resources::Deposition.parse(request(:get, "deposit/depositions/", {}, nil))
     end
 
     # GET /Deposit/Deposition/{id}
