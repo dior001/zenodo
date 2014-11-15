@@ -25,6 +25,7 @@ Due to the use of keyword arguments this gem requires Ruby 2.0 and above.
 This gem uses VCR for testing. https://github.com/vcr/vcr
 
 To run gem tests complete the following:
+
 1. Obtain a Zenodo API token from their site. https://zenodo.org.
 2. Create file gem_secret.yml in the gems config folder.
 3. Add the following to your gem_secret.yml file. ```zenodo_api_key: '<YOUR API TOKEN>'```
