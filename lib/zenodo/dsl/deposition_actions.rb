@@ -9,7 +9,7 @@ module Zenodo
     # @return [Zenodo::Resources::deposition, nil].
     def publish_deposition(id:)
       raise ArgumentError, "ID cannot be blank" if id.blank?
-      Resources::Deposition.parse(request(:post, "deposit/depositions/#{id}/actions/publish"))
+      Resources::Deposition.parse(request(:post, "deposit/depositions/#{id}/actions/publish", nil, nil))
     end
 
     # Edit POST deposit/depositions/:id/actions/edit

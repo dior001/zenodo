@@ -40,7 +40,7 @@ module Zenodo
       raise ArgumentError, "Unsupported method #{method.inspect}. Only :get, :post, :put, :delete are allowed" unless REQUESTS.include?(method)
 
       token_url = UrlHelper.build_url(path: "#{URL}#{path}", params: {access_token: @api_key})
-      payload = !query.empty? ? JSON.generate(query) : ''
+      payload = !query.blank? ? JSON.generate(query) : nil
       response = @connection.run_request(method, token_url, payload, headers)
 
       case response.status.to_i
