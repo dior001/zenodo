@@ -29,6 +29,22 @@ describe Zenodo::DSL::DepositionActions do
   end
 
   # Edit POST deposit/depositions/:id/actions/edit
+  describe '#edit_deposition' do
+    it 'allows editing of a deposition' do
+      VCR.use_cassette('edit_deposition') do
+        response = Zenodo.client.edit_deposition(id: deposition_id)
+        expect(response).to be_a(Deposition)
+      end
+    end
+  end
 
   # Discard POST deposit/depositions/:id/actions/discard
+  describe '#discard_deposition' do
+    it 'discards proposed edits of a deposition' do
+      VCR.use_cassette('discard_deposition') do
+        response = Zenodo.client.discard_deposition(id: deposition_id)
+        expect(response).to be_a(Deposition)
+      end
+    end
+  end
 end
