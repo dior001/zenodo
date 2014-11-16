@@ -22,6 +22,7 @@ module Zenodo
 
       # Setup HTTP request connection to Zenodo.
       @connection ||= Faraday.new do |builder|
+        builder.request :multipart
         builder.request :url_encoded
         builder.response :logger if Zenodo.logger
         builder.adapter Faraday.default_adapter
@@ -40,7 +41,15 @@ module Zenodo
       raise ArgumentError, "Unsupported method #{method.inspect}. Only :get, :post, :put, :delete are allowed" unless REQUESTS.include?(method)
 
       token_url = UrlHelper.build_url(path: "#{URL}#{path}", params: {access_token: @api_key})
-      payload = !query.blank? ? JSON.generate(query) : nil
+      payload = nil
+      if query.present?
+        accept = headers.present? ? headers['Accept'] : nil
+        if accept.present? && accept == 'application/json'
+          payload = JSON.generate(query)
+        else
+          payload = query
+        end
+      end
       response = @connection.run_request(method, token_url, payload, headers)
 
       case response.status.to_i

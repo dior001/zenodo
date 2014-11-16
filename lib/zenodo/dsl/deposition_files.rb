@@ -14,14 +14,22 @@ module Zenodo
 
     # Create (upload) POST deposit/depositions/:id/files
     # Upload a new file.
+    # Note the upload will fail if the filename already exists.
     # @param [String, Fixnum] id A deposition's ID.
-    # @param [Hash] deposition_file The deposition file to upload.
+    # @param [String] file The file to upload.
+    # @param [String] filename The name of the file (optional).
     # @raise [ArgumentError] If the method arguments are blank.
     # @return [Zenodo::Resources::DepositionFile].
-    def create_deposition_file(id:, deposition_file:)
+    def create_deposition_file(id:, file:, filename: '')
       raise ArgumentError, "ID cannot be blank" if id.blank?
-      raise ArgumentError, "Deposition file cannot be blank" if deposition_file.blank?
-      Resources::DepositionFile.parse(request(:post, "deposit/depositions/#{id}/files", deposition_file, "Content-Type" => "multipart/form-data"))
+      raise ArgumentError, "File cannot be blank" if file.blank?
+      content_type = MIME::Types.type_for(file).first.content_type
+      io = Faraday::UploadIO.new(file, content_type)
+      filename = File.basename(file) if filename.blank?
+      Resources::DepositionFile.parse(
+        request(:post, "deposit/depositions/#{id}/files", { name: filename, file: io },
+          "Content-Type" => "multipart/form-data")
+      )
     end
 
     # Sort PUT deposit/depositions/:id/files

@@ -9,6 +9,7 @@ require 'zenodo/dsl/depositions'
 require 'zenodo/dsl/deposition_files'
 require 'zenodo/dsl/deposition_actions'
 require 'zenodo/utils'
+require 'mime-types'
 
 module Zenodo
   module DSL
