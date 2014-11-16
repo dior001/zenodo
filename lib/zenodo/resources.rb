@@ -7,4 +7,5 @@ end
 
 require 'zenodo/resources/object'
 require 'zenodo/resources/deposition'
+require 'zenodo/resources/deposition_file'
 
