@@ -11,10 +11,18 @@ describe Zenodo::DSL::DepositionActions do
       }
     }
   end
+  let!(:file) { File.join(APP_ROOT, 'spec/fixtures/test_file_upload.txt') }
   let!(:deposition_id) do
     VCR.use_cassette('create_deposition_for_publishing') do
       deposition = Zenodo.client.create_deposition(deposition: deposition_attributes)
       deposition['id']
+    end
+  end
+  let!(:deposition_file_id) do
+    VCR.use_cassette('create_deposition_file_for_publishing') do
+      deposition_file = Zenodo.client.create_deposition_file(
+        id: deposition_id, file: file)
+      deposition_file['id']
     end
   end
 

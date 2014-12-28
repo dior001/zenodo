@@ -4,6 +4,7 @@ module Zenodo
   module DSL::DepositionActions
     # Publish POST deposit/depositions/:id/actions/publish
     # Publishes a deposition.
+    # Note publishing will fail if no files are associated with the deposition.
     # @param [String, Fixnum] id A deposition's ID.
     # @raise [ArgumentError] If the method arguments are blank.
     # @return [Zenodo::Resources::deposition, nil].
