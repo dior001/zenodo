@@ -9,7 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["David Iorns"]
   spec.email         = ["david.iorns@gmail.com"]
   spec.summary       = 'A Ruby wrapper for the Zenodo API. https://zenodo.org/dev'
-  spec.description   = "ZENODO builds and operate a simple and innovative service that enables researchers, scientists,
+  spec.description   = "A Ruby wrapper for the Zenodo API. https://zenodo.org/dev
+
+                        ZENODO builds and operates a simple and innovative service that enables researchers, scientists,
                         EU projects and institutions to share and showcase multidisciplinary research results (data and publications)
                         that are not part of the existing institutional or subject-based repositories of the research communities."
   spec.homepage      = "https://github.com/sprotocols/zenodo"
@@ -23,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.0.0'
 
   spec.add_dependency 'faraday', '~> 0.9'
-  spec.add_dependency 'activesupport', '~> 4.2'
+  spec.add_dependency 'activesupport', '~> 4.1'
   spec.add_dependency 'ruby-filemagic', '~> 0.6'
 
   spec.add_development_dependency 'bundler', '~> 1.7'
