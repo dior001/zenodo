@@ -23,7 +23,8 @@ module Zenodo
     def create_deposition_file(id:, file:, filename: '')
       raise ArgumentError, "ID cannot be blank" if id.blank?
       raise ArgumentError, "File cannot be blank" if file.blank?
-      content_type = MIME::Types.type_for(file).first.content_type
+
+      content_type = FileMagic.new(FileMagic::MAGIC_MIME).file(file)
       io = Faraday::UploadIO.new(file, content_type)
       filename = File.basename(file) if filename.blank?
       Resources::DepositionFile.parse(
