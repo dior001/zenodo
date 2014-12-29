@@ -21,7 +21,7 @@ describe Zenodo::DSL::DepositionActions do
   let!(:deposition_file_id) do
     VCR.use_cassette('create_deposition_file_for_publishing') do
       deposition_file = Zenodo.client.create_deposition_file(
-        id: deposition_id, file: file)
+        id: deposition_id, file_or_io: file)
       deposition_file['id']
     end
   end

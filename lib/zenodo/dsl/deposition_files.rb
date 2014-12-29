@@ -16,18 +16,18 @@ module Zenodo
     # Upload a new file.
     # Note the upload will fail if the filename already exists.
     # @param [String, Fixnum] id A deposition's ID.
-    # @param [String] file The file to upload.
-    # @param [String] filename The name of the file (optional).
-    # @param [String] content_type The content type of the file (optional).
-    # @raise [ArgumentError] If the method arguments are blank.
+    # @param [String] file_or_io The file or already open IO to upload.
+    # @param [String] filename The name of the file (optional except when an IO).
+    # @param [String] content_type The content type of the file (optional except when an IO).
+    # @raise [ArgumentError] If the required method arguments are blank.
     # @return [Zenodo::Resources::DepositionFile].
-    def create_deposition_file(id:, file:, filename: '', content_type: '')
+    def create_deposition_file(id:, file_or_io:, filename: nil, content_type: nil)
       raise ArgumentError, "ID cannot be blank" if id.blank?
-      raise ArgumentError, "File cannot be blank" if file.blank?
+      raise ArgumentError, "File or IO cannot be blank" if file_or_io.blank?
 
-      content_type = FileMagic.new(FileMagic::MAGIC_MIME).file(file) if content_type.blank?
-      io = Faraday::UploadIO.new(file, content_type)
-      filename = File.basename(file) if filename.blank?
+      content_type = FileMagic.new(FileMagic::MAGIC_MIME).file(file_or_io) if content_type.blank?
+      io = Faraday::UploadIO.new(file_or_io, content_type, filename)
+      filename = File.basename(file_or_io) if filename.blank?
       Resources::DepositionFile.parse(
         request(:post, "deposit/depositions/#{id}/files", { name: filename, file: io },
           "Content-Type" => "multipart/form-data")

@@ -27,14 +27,14 @@ describe Zenodo::DSL::DepositionFiles do
   let!(:deposition_file_id) do
     VCR.use_cassette('create_deposition_file') do
       deposition_file = Zenodo.client.create_deposition_file(
-        id: deposition_id, file: file)
+        id: deposition_id, file_or_io: file)
       deposition_file['id']
     end
   end
   let!(:deleted_deposition_file_id) do
     VCR.use_cassette('create_deposition_file_for_deletion') do
       deposition_file = Zenodo.client.create_deposition_file(
-        id: deposition_id, file: file_delete, filename: 'foobar.txt')
+        id: deposition_id, file_or_io: file_delete, filename: 'foobar.txt')
       deposition_file['id']
     end
   end
@@ -57,7 +57,7 @@ describe Zenodo::DSL::DepositionFiles do
   describe '#create_deposition_file' do
     it 'uploads a file for a deposition' do
       VCR.use_cassette('create_deposition_file') do
-        deposition_file = Zenodo.client.create_deposition_file(id: deposition_id, file: file)
+        deposition_file = Zenodo.client.create_deposition_file(id: deposition_id, file_or_io: file)
         expect(deposition_file).to be_a(DepositionFile)
       end
     end
