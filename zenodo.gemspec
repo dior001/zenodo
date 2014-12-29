@@ -8,8 +8,11 @@ Gem::Specification.new do |spec|
   spec.version       = Zenodo::VERSION
   spec.authors       = ["David Iorns"]
   spec.email         = ["david.iorns@gmail.com"]
-  spec.summary       = 'A Ruby wrapper for the Zenodo API.'
-  spec.homepage      = ""
+  spec.summary       = 'A Ruby wrapper for the Zenodo API. https://zenodo.org/dev'
+  spec.description   = "ZENODO builds and operate a simple and innovative service that enables researchers, scientists,
+                        EU projects and institutions to share and showcase multidisciplinary research results (data and publications)
+                        that are not part of the existing institutional or subject-based repositories of the research communities."
+  spec.homepage      = "https://github.com/sprotocols/zenodo"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
