@@ -18,13 +18,14 @@ module Zenodo
     # @param [String, Fixnum] id A deposition's ID.
     # @param [String] file The file to upload.
     # @param [String] filename The name of the file (optional).
+    # @param [String] content_type The content type of the file (optional).
     # @raise [ArgumentError] If the method arguments are blank.
     # @return [Zenodo::Resources::DepositionFile].
-    def create_deposition_file(id:, file:, filename: '')
+    def create_deposition_file(id:, file:, filename: '', content_type: '')
       raise ArgumentError, "ID cannot be blank" if id.blank?
       raise ArgumentError, "File cannot be blank" if file.blank?
 
-      content_type = FileMagic.new(FileMagic::MAGIC_MIME).file(file)
+      content_type = FileMagic.new(FileMagic::MAGIC_MIME).file(file) if content_type.blank?
       io = Faraday::UploadIO.new(file, content_type)
       filename = File.basename(file) if filename.blank?
       Resources::DepositionFile.parse(
