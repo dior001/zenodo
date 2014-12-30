@@ -25,7 +25,7 @@ module Zenodo
       raise ArgumentError, "ID cannot be blank" if id.blank?
       raise ArgumentError, "File or IO cannot be blank" if file_or_io.blank?
 
-      content_type = FileMagic.new(FileMagic::MAGIC_MIME).file(file_or_io) if content_type.blank?
+      content_type = MIME::Types.type_for(file_or_io).first.content_type if content_type.blank?
       io = Faraday::UploadIO.new(file_or_io, content_type, filename)
       filename = File.basename(file_or_io) if filename.blank?
       Resources::DepositionFile.parse(
