@@ -56,9 +56,9 @@ module Zenodo
         when 200..299
           return response
         when 404
-          raise ResourceNotFoundError.new(response: response)
+          raise ResourceNotFoundError.new(method: method, url:token_url, headers:headers, response: response)
         else
-          raise ClientError.new(response: response)
+          raise ClientError.new(method: method, url:token_url, headers:headers, response: response)
       end
     end
   end
