@@ -47,8 +47,8 @@ module Zenodo::Resources::Object::Attributes
   end
 
   def method_missing(name, *args, &block)
-    attribute = name.to_s.upcase
-    if __getobj__.key?(attribute)
+    name = name.to_s
+    if __getobj__.key?(name)
       self.class.define_attribute_accessor(name)
       deserialize_attribute(name, self.class.attributes[name.to_sym])
     else
