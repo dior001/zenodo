@@ -14,7 +14,8 @@ module Zenodo
     # @param [String, Fixnum] id A deposition's ID.
     # @raise [ArgumentError] If the method arguments are blank.
     # @return [Zenodo::Resources::deposition, nil].
-    def get_deposition(id:)
+    def get_deposition(options={})
+      id = options[:id] || raise(ArgumentError, "Must supply :id")
       raise ArgumentError, "ID cannot be blank" if id.blank?
       Resources::Deposition.parse(request(:get, "deposit/depositions/#{id}"))
     end
@@ -24,7 +25,8 @@ module Zenodo
     # @param [Hash] deposition The deposition to create.
     # @raise [ArgumentError] If the method arguments are blank.
     # @return [Zenodo::Resources::deposition, nil].
-    def create_deposition(deposition:)
+    def create_deposition(options={})
+      deposition = options[:deposition] || raise(ArgumentError, "Must supply :deposition")
       raise ArgumentError, "Deposition cannot be blank" if deposition.blank?
       Resources::Deposition.parse(request(:post, "deposit/depositions/", deposition))
     end
@@ -35,9 +37,9 @@ module Zenodo
     # @param [Hash] deposition The deposition to update.
     # @raise [ArgumentError] If the method arguments are blank.
     # @return [Zenodo::Resources::deposition, nil].
-    def update_deposition(id:, deposition:)
-      raise ArgumentError, "ID cannot be blank" if id.blank?
-      raise ArgumentError, "Deposition cannot be blank" if deposition.blank?
+    def update_deposition(options={})
+      id = options[:id] || raise(ArgumentError, "Must supply :id")
+      deposition = options[:deposition] || raise(ArgumentError, "Must supply :deposition")
       Resources::Deposition.parse(request(:put, "deposit/depositions/#{id}", deposition))
     end
 
@@ -46,8 +48,8 @@ module Zenodo
     # @param [String, Fixnum] id A deposition's ID.
     # @raise [ArgumentError] If the method arguments are blank.
     # @return [Faraday::Response].
-    def delete_deposition(id:)
-      raise ArgumentError, "ID cannot be blank" if id.blank?
+    def delete_deposition(options={})
+      id = options[:id] || raise(ArgumentError, "Must supply :id")
       request(:delete, "deposit/depositions/#{id}")
     end
   end

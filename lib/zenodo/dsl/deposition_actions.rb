@@ -8,8 +8,8 @@ module Zenodo
     # @param [String, Fixnum] id A deposition's ID.
     # @raise [ArgumentError] If the method arguments are blank.
     # @return [Zenodo::Resources::deposition, nil].
-    def publish_deposition(id:)
-      raise ArgumentError, "ID cannot be blank" if id.blank?
+    def publish_deposition(options={})
+      id = options[:id] || raise(ArgumentError, "Must supply :id")
       Resources::Deposition.parse(request(:post, "deposit/depositions/#{id}/actions/publish", nil, nil))
     end
 
@@ -18,8 +18,8 @@ module Zenodo
     # @param [String, Fixnum] id A deposition's ID.
     # @raise [ArgumentError] If the method arguments are blank.
     # @return [Zenodo::Resources::deposition, nil].
-    def edit_deposition(id:)
-      raise ArgumentError, "ID cannot be blank" if id.blank?
+    def edit_deposition(options={})
+      id = options[:id] || raise(ArgumentError, "Must supply :id")
       Resources::Deposition.parse(request(:post, "deposit/depositions/#{id}/actions/edit", nil, nil))
     end
 
@@ -28,8 +28,8 @@ module Zenodo
     # @param [String, Fixnum] id A deposition's ID.
     # @raise [ArgumentError] If the method arguments are blank.
     # @return [Zenodo::Resources::deposition, nil].
-    def discard_deposition(id:)
-      raise ArgumentError, "ID cannot be blank" if id.blank?
+    def discard_deposition(options={})
+      id = options[:id] || raise(ArgumentError, "Must supply :id")
       Resources::Deposition.parse(request(:post, "deposit/depositions/#{id}/actions/discard", nil, nil))
     end
   end
