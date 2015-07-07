@@ -10,13 +10,16 @@ module Zenodo
   class << self
     # @return [String]
     attr_accessor :api_key
+    attr_accessor :url
     attr_accessor :logger
   end
+
+  self.url = 'https://zenodo.org/api/'
 
   module_function
 
   # @return [Zenodo::Client]
   def client
-    @client ||= Client.new(Zenodo.api_key)
+    @client ||= Client.new(Zenodo.api_key, Zenodo.url)
   end
 end

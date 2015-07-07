@@ -12,13 +12,13 @@ module Zenodo
     include Errors
     include Utils
 
-    URL = 'https://zenodo.org/api/'
     REQUESTS = [:get, :post, :put, :delete]
     HEADERS = {'Accept' => 'application/json', 'Content-Type' => 'application/json'}
 
     # @param [String] api_key
-    def initialize(api_key = Zenodo.api_key)
+    def initialize(api_key = Zenodo.api_key, url = Zenodo.url)
       @api_key = api_key
+      @url = url
 
       # Setup HTTP request connection to Zenodo.
       @connection ||= Faraday.new do |builder|
@@ -40,7 +40,7 @@ module Zenodo
     def request(method, path, query = {}, headers = HEADERS)
       raise ArgumentError, "Unsupported method #{method.inspect}. Only :get, :post, :put, :delete are allowed" unless REQUESTS.include?(method)
 
-      token_url = UrlHelper.build_url(path: "#{URL}#{path}", params: {access_token: @api_key})
+      token_url = UrlHelper.build_url(path: "#{@url}#{path}", params: {access_token: @api_key})
       payload = nil
       if query.present?
         accept = headers.present? ? headers['Accept'] : nil
