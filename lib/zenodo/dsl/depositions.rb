@@ -17,7 +17,6 @@ module Zenodo
     # @return [Zenodo::Resources::deposition, nil].
     def get_deposition(options={})
       id = options[:id] || raise(ArgumentError, "Must supply :id")
-      raise ArgumentError, "ID cannot be blank" if id.blank?
       Resources::Deposition.parse(request(:get, "deposit/depositions/#{id}"))
     end
 
@@ -29,7 +28,6 @@ module Zenodo
     # @return [Zenodo::Resources::deposition, nil].
     def create_deposition(options={})
       deposition = options[:deposition] || raise(ArgumentError, "Must supply :deposition")
-      raise ArgumentError, "Deposition cannot be blank" if deposition.blank?
       Resources::Deposition.parse(request(:post, "deposit/depositions/", deposition))
     end
 
