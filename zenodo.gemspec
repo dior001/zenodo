@@ -6,8 +6,8 @@ require 'zenodo/version'
 Gem::Specification.new do |spec|
   spec.name          = "zenodo"
   spec.version       = Zenodo::VERSION
-  spec.authors       = ["David Iorns"]
-  spec.email         = ["david.iorns@gmail.com"]
+  spec.authors       = ["David Iorns", "Zach Dennis"]
+  spec.email         = ["david.iorns@gmail.com", "zach.dennis@gmail.com"]
   spec.summary       = 'A Ruby wrapper for the Zenodo API. https://zenodo.org/dev'
   spec.description   = "A Ruby wrapper for the Zenodo API. https://zenodo.org/dev.
 
