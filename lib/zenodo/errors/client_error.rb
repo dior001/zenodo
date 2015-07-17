@@ -1,7 +1,12 @@
 module Zenodo
   module Errors
     class ClientError < StandardError
-      def initialize(method:, url:, headers:, response:)
+      def initialize(options={})
+        method = options[:method] || raise(ArgumentError, "Must supply :method")
+        url = options[:url] || raise(ArgumentError, "Must supply :url")
+        response = options[:response] || raise(ArgumentError, "Must supply :response")
+        headers = options[:headers]
+
         super <<-STR.gsub(/^\s*/, '')
           HTTP #{method} #{url}
           Request Headers: #{headers}
