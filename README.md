@@ -1,3 +1,5 @@
+## NOT ACTIVELY MAINTAINED
+
 # Zenodo
 
 A Ruby wrapper for the Zenodo API.
